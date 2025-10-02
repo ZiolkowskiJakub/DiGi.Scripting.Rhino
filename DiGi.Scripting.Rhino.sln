@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiGi.Scripting.Rhino", "DiGi.Scripting.Rhino\DiGi.Scripting.Rhino.csproj", "{21D41B2B-CE0C-4B06-93AB-ED59B30804CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiGi.Scripting.CSharp.Rhino", "DiGi.Scripting.CSharp.Rhino\DiGi.Scripting.CSharp.Rhino.csproj", "{51F298E7-212B-4B86-8230-AC7A0F457642}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21D41B2B-CE0C-4B06-93AB-ED59B30804CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D41B2B-CE0C-4B06-93AB-ED59B30804CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D41B2B-CE0C-4B06-93AB-ED59B30804CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D41B2B-CE0C-4B06-93AB-ED59B30804CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51F298E7-212B-4B86-8230-AC7A0F457642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F298E7-212B-4B86-8230-AC7A0F457642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F298E7-212B-4B86-8230-AC7A0F457642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F298E7-212B-4B86-8230-AC7A0F457642}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {426C3A24-949D-4A1D-857C-41FBCEBD033C}
+	EndGlobalSection
+EndGlobal
