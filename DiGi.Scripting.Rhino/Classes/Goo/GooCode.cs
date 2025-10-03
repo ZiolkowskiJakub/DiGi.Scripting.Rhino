@@ -17,24 +17,21 @@ namespace DiGi.Scripting.Rhino.Classes
             Value = code;
         }
 
-        public override bool CastFrom(object source)
+        public override bool CastFrom(object? source)
         {
-            if (source is Scripting.Classes.Code)
+            if (source is Scripting.Classes.Code code)
             {
-                Value = (Scripting.Classes.Code)source;
+                Value = code;
                 return true;
             }
 
-            object source_Temp = source;
+            object? source_Temp = source;
             if (source is IGH_Goo gh_Goo)
             {
-                source_Temp = (gh_Goo as dynamic).Value;
-            }
-
-            if (source_Temp is Scripting.Classes.Code)
-            {
-                Value = (Scripting.Classes.Code)source;
-                return true;
+                if (DiGi.Rhino.Core.Query.TryGetValue(gh_Goo, out object? source_Temp_Temp))
+                {
+                    source_Temp = source_Temp_Temp;
+                }
             }
 
             if (source_Temp is string @string)
@@ -50,13 +47,14 @@ namespace DiGi.Scripting.Rhino.Classes
         {
             return base.CastTo(ref target);
         }
+        
         public override IGH_Goo Duplicate()
         {
             return new GooCode(Value);
         }
     }
 
-    public class GooCodeParam : GooPresistentParam<GooCode, Scripting.Classes.Code>
+    public class GooCodeParam : GooSerializablePresistentParam<GooCode, Scripting.Classes.Code>
     {
         public GooCodeParam()
             : base()

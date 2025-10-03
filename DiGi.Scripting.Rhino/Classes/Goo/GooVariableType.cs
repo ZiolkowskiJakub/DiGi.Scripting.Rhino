@@ -17,24 +17,21 @@ namespace DiGi.Scripting.Rhino.Classes
             Value = variableType;
         }
 
-        public override bool CastFrom(object source)
+        public override bool CastFrom(object? source)
         {
-            if (source is Scripting.Classes.Code)
+            if (source is Scripting.Classes.VariableType variableType)
             {
-                Value = (Scripting.Classes.VariableType)source;
+                Value = variableType;
                 return true;
             }
 
-            object source_Temp = source;
+            object? source_Temp = source;
             if (source is IGH_Goo gh_Goo)
             {
-                source_Temp = (gh_Goo as dynamic).Value;
-            }
-
-            if (source_Temp is Scripting.Classes.VariableType)
-            {
-                Value = (Scripting.Classes.VariableType)source;
-                return true;
+                if (DiGi.Rhino.Core.Query.TryGetValue(gh_Goo, out object? source_Temp_Temp))
+                {
+                    source_Temp = source_Temp_Temp;
+                }
             }
 
             if (source_Temp is string @string)
@@ -57,7 +54,7 @@ namespace DiGi.Scripting.Rhino.Classes
         }
     }
 
-    public class GooVariableTypeParam : GooPresistentParam<GooVariableType, Scripting.Classes.VariableType>
+    public class GooVariableTypeParam : GooSerializablePresistentParam<GooVariableType, Scripting.Classes.VariableType>
     {
         public GooVariableTypeParam()
             : base()
