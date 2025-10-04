@@ -114,7 +114,7 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
                 dataAccess.GetDataList(index, outputVariableTypes);
             }
 
-            CSharp.Classes.Script script = new CSharp.Classes.Script(code, inputVariableTypes, outputVariableTypes);
+            CSharp.Classes.Script script = new (code, inputVariableTypes, outputVariableTypes);
 
             index = Params.IndexOfOutputParam("Script");
             if (index != -1)

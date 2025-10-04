@@ -1,20 +1,21 @@
 ﻿using DiGi.Rhino.Core.Classes;
+using GH_IO.Serialization;
 using Grasshopper.Kernel.Types;
 using System;
 
 namespace DiGi.Scripting.Rhino.Classes
 {
-    public class GooInput : GooObject<Scripting.Classes.Input>
+    public class GooInput : GooObject<Interfaces.ISerializableInput>
     {
         public GooInput()
             : base()
         {
         }
 
-        public GooInput(Scripting.Classes.Input? input)
+        public GooInput(Interfaces.ISerializableInput? serializableInput)
             : base()
         {
-            Value = input;
+            Value = serializableInput;
         }
 
         public override IGH_Goo Duplicate()
@@ -23,7 +24,7 @@ namespace DiGi.Scripting.Rhino.Classes
         }
     }
 
-    public class GooInputParam : GooPresistentParam<GooInput, Scripting.Classes.Input>
+    public class GooInputParam : GooPresistentParam<GooInput, Interfaces.ISerializableInput>
     {
         public GooInputParam()
             : base()
