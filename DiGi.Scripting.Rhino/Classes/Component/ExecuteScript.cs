@@ -1,6 +1,8 @@
 ﻿using DiGi.GIS.Rhino.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
+using DiGi.Scripting.Classes;
+using DiGi.Scripting.Interfaces;
 using Grasshopper.Kernel;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace DiGi.Scripting.Rhino.Classes
     public class ExecuteScript : VariableParameterComponent
     {
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of object.
         /// </summary>
         public ExecuteScript()
           : base("Scripting.ExecuteScript", "Scripting.ExecuteScript",
@@ -40,6 +42,7 @@ namespace DiGi.Scripting.Rhino.Classes
                 List<Param> result =
                 [
                     new Param(new GooScriptParam() { Name = "Script", NickName = "Script", Description = "Script", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooInputParam() { Name = "Inputs", NickName = "Inputs", Description = "Inputs", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Binding),
                 ];
                 return [.. result];
 
@@ -56,7 +59,9 @@ namespace DiGi.Scripting.Rhino.Classes
             {
                 List<Param> result =
                 [
-                    new Param(new GooScriptParam() { Name = "Script", NickName = "Script", Description = "Script", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Boolean() { Name = "Succeeded", NickName = "Succeeded", Description = "Succeeded", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooOutputParam() { Name = "Outputs", NickName = "Outputs", Description = "Outputs", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "ExceptionMessage", NickName = "ExceptionMessage", Description = "Exception message", Access = GH_ParamAccess.item }, ParameterVisibility.Binding)
                 ];
                 return [.. result];
             }
@@ -72,22 +77,75 @@ namespace DiGi.Scripting.Rhino.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Street");
-            string? street = null;
-            if (index == -1 || !dataAccess.GetData(index, ref street))
+            index = Params.IndexOfInputParam("Script");
+            Script? script = null;
+            if (index == -1 || !dataAccess.GetData(index, ref script) || script == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            DiGi.Core.Classes.Address address = new(street, null, null, DiGi.Core.Enums.CountryCode.Undefined);
-
-            index = Params.IndexOfOutputParam("Address");
+            index = Params.IndexOfInputParam("Inputs");
+            List<ISerializableInput> serializableInputs = [];
             if (index != -1)
             {
-                dataAccess.SetData(index, new GooAddress(address));
+                if (!dataAccess.GetDataList(index, serializableInputs))
+                {
+                    serializableInputs = [];
+                }
             }
 
+            Response? response = script.Execute(serializableInputs);
+
+            index = Params.IndexOfOutputParam("Succeeded");
+            if(index != -1)
+            {
+                dataAccess.SetData(index, response != null && response.Succeeded);
+            }
+
+            Exception? exception = response?.Exception;
+
+            index = Params.IndexOfOutputParam("ExceptionMessage");
+            if (index != -1)
+            {
+                string? message = exception?.Message;
+                
+                dataAccess.SetData(index, message);
+
+                if(!string.IsNullOrWhiteSpace(message))
+                {
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, message);
+                    return;
+                }
+            }
+
+            index = Params.IndexOfOutputParam("Outputs");
+            if (index != -1)
+            {
+                List<GooOutput>? gooOutputs = null;
+                if(response?.Outputs is IEnumerable<Output> outputs)
+                {
+                    gooOutputs = [];
+                    foreach(Output output in outputs)
+                    {
+                        SerializableOutput? serializableOutput = null;
+                        try
+                        {
+                            serializableOutput = new SerializableOutput(output.Name, output?.Value as dynamic);
+                        }
+                        catch(Exception exception_Conversion)
+                        {
+                            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, string.Format("Could convert output: {0}", exception_Conversion.Message));
+                            return;
+                        }
+
+                        gooOutputs.Add(new GooOutput(serializableOutput));
+                    }
+
+                }
+
+                dataAccess.SetDataList(index, gooOutputs);
+            }
         }
     }
 }

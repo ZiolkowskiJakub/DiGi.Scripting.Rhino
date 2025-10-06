@@ -12,7 +12,7 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
     public class CSharpScript : VariableParameterComponent
     {
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of object.
         /// </summary>
         public CSharpScript()
           : base("Scripting.CSharpScript", "Scripting.CSharpScript",
@@ -100,14 +100,14 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
                 dataAccess.GetDataList(index, imports);
             }
 
-            List<VariableType> inputVariableTypes = [];
+            List<Scripting.Classes.VariableType> inputVariableTypes = [];
             index = Params.IndexOfInputParam("InputVariableTypes");
             if (index != -1)
             {
                 dataAccess.GetDataList(index, inputVariableTypes);
             }
 
-            List<VariableType> outputVariableTypes = [];
+            List<Scripting.Classes.VariableType> outputVariableTypes = [];
             index = Params.IndexOfInputParam("OutputVariableTypes");
             if (index != -1)
             {
@@ -115,6 +115,16 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
             }
 
             CSharp.Classes.Script script = new (code, inputVariableTypes, outputVariableTypes);
+            
+            if(references != null && references.Count != 0)
+            {
+                script.References = [.. references];
+            }
+
+            if(imports != null && imports.Count != 0)
+            {
+                script.Imports = [.. imports];
+            }
 
             index = Params.IndexOfOutputParam("Script");
             if (index != -1)
