@@ -1,5 +1,4 @@
 ﻿using DiGi.Rhino.Core.Classes;
-using DiGi.Scripting.Classes;
 using DiGi.Scripting.Rhino.Classes;
 using Grasshopper.Kernel.Types;
 
@@ -8,36 +7,36 @@ namespace DiGi.Scripting.Rhino.Inspect
     public static partial class Inspect
     {
         [Inspect("Value", "Value", "Value")]
-        public static GooObject? Value(this Output? output)
+        public static GooObject? Value(this Scripting.Classes.Input? input)
         {
-            if (output == null)
+            if (input == null)
             {
                 return null;
             }
 
-            return new GooObject(output.Value);
+            return new GooObject(input.Value);
         }
 
         [Inspect("Name", "Name", "Name")]
-        public static GH_String? Name(this Output? output)
+        public static GH_String? Name(this Scripting.Classes.Input? input)
         {
-            if (output == null)
+            if (input == null)
             {
                 return null;
             }
 
-            return new GH_String(output.Name);
+            return new GH_String(input.Name);
         }
 
         [Inspect("VariableType", "VariableType", "VariableType")]
-        public static GooVariableType? VariableType(this Output? output)
+        public static GooVariableType? VariableType(this Scripting.Classes.Input? input)
         {
-            if (output == null)
+            if (input == null)
             {
                 return null;
             }
 
-            return new GooVariableType(output.VariableType);
+            return new GooVariableType(input.VariableType);
         }
     }
 }
