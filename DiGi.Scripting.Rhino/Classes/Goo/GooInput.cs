@@ -4,7 +4,7 @@ using System;
 
 namespace DiGi.Scripting.Rhino.Classes
 {
-    public class GooInput : GooObject<Interfaces.ISerializableInput>
+    public class GooInput : GooObject<Interfaces.ISerializableInput?>
     {
         public GooInput()
             : base()

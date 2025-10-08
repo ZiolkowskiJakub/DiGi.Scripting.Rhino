@@ -5,7 +5,7 @@ using System;
 
 namespace DiGi.Scripting.Rhino.Classes
 {
-    public class GooOutput : GooObject<Interfaces.ISerializableOutput>
+    public class GooOutput : GooObject<Interfaces.ISerializableOutput?>
     {
         public GooOutput()
             : base()
