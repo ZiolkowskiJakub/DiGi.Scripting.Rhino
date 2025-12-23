@@ -29,7 +29,7 @@ namespace DiGi.Scripting.Rhino.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
-        
+
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -94,7 +94,7 @@ namespace DiGi.Scripting.Rhino.Classes
             Type? type = null;
             if (index != -1)
             {
-                if(!dataAccess.GetData(index, ref type))
+                if (!dataAccess.GetData(index, ref type))
                 {
                     type = null;
                 }
@@ -105,15 +105,15 @@ namespace DiGi.Scripting.Rhino.Classes
                 value = value_Converted;
             }
 
-            if(type != null)
+            if (type != null)
             {
-                if(DiGi.Core.Query.TryConvert(value, out value_Converted, type))
+                if (DiGi.Core.Query.TryConvert(value, out value_Converted, type))
                 {
                     value = value_Converted;
                 }
             }
 
-            Scripting.Classes.SerializableInput serializableInput = new (name, value as dynamic);
+            Scripting.Classes.SerializableInput serializableInput = new(name, value as dynamic);
 
             index = Params.IndexOfOutputParam("Input");
             if (index != -1)

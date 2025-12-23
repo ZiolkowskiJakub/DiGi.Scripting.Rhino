@@ -47,7 +47,7 @@ namespace DiGi.Scripting.Rhino.Classes
         {
             return base.CastTo(ref target);
         }
-        
+
         public override IGH_Goo Duplicate()
         {
             return new GooCode(Value);

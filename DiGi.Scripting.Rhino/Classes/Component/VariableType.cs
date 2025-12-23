@@ -29,7 +29,7 @@ namespace DiGi.Scripting.Rhino.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
-        
+
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -85,18 +85,18 @@ namespace DiGi.Scripting.Rhino.Classes
             Type? type = null;
             if (index != -1)
             {
-                if(!dataAccess.GetData(index, ref type))
+                if (!dataAccess.GetData(index, ref type))
                 {
                     type = null;
                 }
             }
 
-            if(type == null)
+            if (type == null)
             {
                 type = typeof(object);
             }
 
-            Scripting.Classes.VariableType variableType = new (name, type);
+            Scripting.Classes.VariableType variableType = new(name, type);
 
             index = Params.IndexOfOutputParam("VariableType");
             if (index != -1)

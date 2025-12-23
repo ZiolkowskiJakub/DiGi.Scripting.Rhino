@@ -1,5 +1,4 @@
-﻿using DiGi.GIS.Rhino.Classes;
-using DiGi.Rhino.Core.Classes;
+﻿using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using DiGi.Scripting.Classes;
 using DiGi.Scripting.Interfaces;
@@ -98,7 +97,7 @@ namespace DiGi.Scripting.Rhino.Classes
             Response? response = script.Execute(serializableInputs);
 
             index = Params.IndexOfOutputParam("Succeeded");
-            if(index != -1)
+            if (index != -1)
             {
                 dataAccess.SetData(index, response != null && response.Succeeded);
             }
@@ -109,10 +108,10 @@ namespace DiGi.Scripting.Rhino.Classes
             if (index != -1)
             {
                 string? message = exception?.Message;
-                
+
                 dataAccess.SetData(index, message);
 
-                if(!string.IsNullOrWhiteSpace(message))
+                if (!string.IsNullOrWhiteSpace(message))
                 {
                     AddRuntimeMessage(GH_RuntimeMessageLevel.Error, message);
                     return;
@@ -123,17 +122,17 @@ namespace DiGi.Scripting.Rhino.Classes
             if (index != -1)
             {
                 List<GooOutput>? gooOutputs = null;
-                if(response?.Outputs is IEnumerable<Output> outputs)
+                if (response?.Outputs is IEnumerable<Output> outputs)
                 {
                     gooOutputs = [];
-                    foreach(Output output in outputs)
+                    foreach (Output output in outputs)
                     {
                         SerializableOutput? serializableOutput = null;
                         try
                         {
                             serializableOutput = new SerializableOutput(output.Name, output?.Value as dynamic);
                         }
-                        catch(Exception exception_Conversion)
+                        catch (Exception exception_Conversion)
                         {
                             AddRuntimeMessage(GH_RuntimeMessageLevel.Error, string.Format("Could convert output: {0}", exception_Conversion.Message));
                             return;

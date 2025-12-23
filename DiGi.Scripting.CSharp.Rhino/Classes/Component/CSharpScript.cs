@@ -1,5 +1,4 @@
-﻿using DiGi.GIS.Rhino.Classes;
-using DiGi.Rhino.Core.Classes;
+﻿using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using DiGi.Scripting.Classes;
 using DiGi.Scripting.Rhino.Classes;
@@ -114,14 +113,14 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
                 dataAccess.GetDataList(index, outputVariableTypes);
             }
 
-            CSharp.Classes.Script script = new (code, inputVariableTypes, outputVariableTypes);
-            
-            if(references != null && references.Count != 0)
+            CSharp.Classes.Script script = new(code, inputVariableTypes, outputVariableTypes);
+
+            if (references != null && references.Count != 0)
             {
                 script.References = [.. references];
             }
 
-            if(imports != null && imports.Count != 0)
+            if (imports != null && imports.Count != 0)
             {
                 script.Imports = [.. imports];
             }
