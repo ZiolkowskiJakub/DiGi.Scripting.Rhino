@@ -31,6 +31,7 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
+
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -47,8 +48,6 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
                     new Param(new GooVariableTypeParam() { Name = "OutputVariableTypes", NickName = "OutputVariableTypes", Description = "Output VariableTypes", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Binding),
                 ];
                 return [.. result];
-
-
             }
         }
 
@@ -130,7 +129,6 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
             {
                 dataAccess.SetData(index, new GooScript(script));
             }
-
         }
     }
 }

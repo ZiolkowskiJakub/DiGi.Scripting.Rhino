@@ -28,4 +28,3 @@ namespace DiGi.Scripting.Rhino.Inspect
         }
     }
 }
-

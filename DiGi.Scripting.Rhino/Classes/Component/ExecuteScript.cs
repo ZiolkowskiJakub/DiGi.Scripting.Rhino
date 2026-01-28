@@ -31,6 +31,7 @@ namespace DiGi.Scripting.Rhino.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
+
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -44,8 +45,6 @@ namespace DiGi.Scripting.Rhino.Classes
                     new Param(new GooInputParam() { Name = "Inputs", NickName = "Inputs", Description = "Inputs", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Binding),
                 ];
                 return [.. result];
-
-
             }
         }
 
@@ -140,7 +139,6 @@ namespace DiGi.Scripting.Rhino.Classes
 
                         gooOutputs.Add(new GooOutput(serializableOutput));
                     }
-
                 }
 
                 dataAccess.SetDataList(index, gooOutputs);

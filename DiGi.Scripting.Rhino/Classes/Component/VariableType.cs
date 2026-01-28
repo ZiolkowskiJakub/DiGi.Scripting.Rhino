@@ -43,8 +43,6 @@ namespace DiGi.Scripting.Rhino.Classes
                     new Param(new GooTypeParam() { Name = "Type", NickName = "Type", Description = "Type", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
                 ];
                 return [.. result];
-
-
             }
         }
 
