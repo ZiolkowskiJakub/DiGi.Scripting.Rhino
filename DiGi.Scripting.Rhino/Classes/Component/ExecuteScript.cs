@@ -1,4 +1,4 @@
-﻿using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using DiGi.Scripting.Classes;
 using DiGi.Scripting.Interfaces;
@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Scripting.Rhino.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that executes a script using provided input parameters and returns the resulting output variables.
+    /// </summary>
     public class ExecuteScript : VariableParameterComponent
     {
         /// <summary>
@@ -25,11 +28,14 @@ namespace DiGi.Scripting.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("23aa1124-1c2f-4371-89de-7c2a2d27f646");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
+        // /// <summary>
+        // /// Provides an Icon for the component.
+        // /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component, which defines how it is displayed in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

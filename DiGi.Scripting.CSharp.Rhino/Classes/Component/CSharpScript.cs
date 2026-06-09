@@ -1,4 +1,4 @@
-﻿using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using DiGi.Scripting.Classes;
 using DiGi.Scripting.Rhino.Classes;
@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Scripting.CSharp.Rhino.Classes
 {
+    /// <summary>
+    /// Provides a Grasshopper component implementation for defining and configuring C# scripts, allowing users to specify source code, references, imports, and variable types.
+    /// </summary>
     public class CSharpScript : VariableParameterComponent
     {
         /// <summary>
@@ -25,11 +28,14 @@ namespace DiGi.Scripting.CSharp.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("9d62aa44-9ca5-487b-8f03-6725874e33e3");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
+        // /// <summary>
+        // /// Provides an Icon for the component.
+        // /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, indicating whether its output is primary or secondary.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

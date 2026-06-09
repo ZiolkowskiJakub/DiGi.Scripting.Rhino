@@ -1,4 +1,4 @@
-﻿using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using System;
@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Scripting.Rhino.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that creates a variable type definition for scripting, specifying its name and system type.
+    /// </summary>
     public class VariableType : VariableParameterComponent
     {
         /// <summary>
@@ -23,11 +26,14 @@ namespace DiGi.Scripting.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("ca762059-ecd2-4fdb-b1d1-fc2a7e5f9d08");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
+        // /// <summary>
+        // /// Provides an Icon for the component.
+        // /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component, which determines its visual priority on the canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
